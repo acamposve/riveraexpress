@@ -45,6 +45,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('debts.index') }}">{{ __('Deudas Clientes') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('providers.index') }}">{{ __('Proveedores') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('purchase.index') }}">{{ __('Compras') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('sale.index') }}">{{ __('Ventas') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -5,6 +5,10 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\DebtsController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ProvidersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +27,11 @@ Route::resource('products', ProductoController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('clients', ClientsController::class);
 Route::resource('debts', DebtsController::class);
+Route::resource('purchase', DebtsController::class);
+Route::resource('sale', DebtsController::class);
+Route::resource('providers', ProvidersController::class);
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
