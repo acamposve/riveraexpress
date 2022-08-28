@@ -16,7 +16,7 @@ class ProductoController extends Controller
     public function index()
     {
         //
-        $datos['products']=Producto::select('productos.Name', 'productos.Description', 'productos.PriceSell', 'productos.PricePurchase', 'categories.Name AS category')
+        $datos['products']=Producto::select('productos.id', 'productos.Name', 'productos.Description', 'productos.PriceSell', 'productos.PricePurchase', 'categories.Name AS category')
         ->join('categories', 'productos.category_id', '=', 'categories.id')
         ->get(); // or first()
 
@@ -67,9 +67,12 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit($id)
     {
         //
+        $product=Producto::findOrFail($id);
+        $categories = Categories::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -79,9 +82,14 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request, $id)
     {
         //
+        $datosProd = request()->except('_token', '_method');
+        Producto::where('id', '=', $id)->update($datosProd);
+$product=Producto::findOrFail($id);
+$categories = Categories::all();
+        return view('products.edit', compact('product', 'categories'))->with('mensaje', 'Producto actualizado');
     }
 
     /**

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Clients;
+use App\Models\Producto;
+use App\Models\Cart;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $clients=Clients::all();
+        $products=Producto::all();
+        $cart=Producto::select('productos.Name', 'productos.PriceSell', 'carts.Quantity')
+        ->join('carts', 'productos.id', '=', 'carts.product_id')
+        ->get(); // or first()
+
+
+
+        return view('home')->with(compact('clients', 'products', 'cart'));
     }
 }

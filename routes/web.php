@@ -8,6 +8,7 @@ use App\Http\Controllers\DebtsController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProvidersController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::resource('debts', DebtsController::class);
 Route::resource('purchase', DebtsController::class);
 Route::resource('sale', DebtsController::class);
 Route::resource('providers', ProvidersController::class);
+Route::resource('cart', CartController::class);
 
 
 Auth::routes();
