@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -15,6 +16,11 @@ class ProductoController extends Controller
     public function index()
     {
         //
+        $datos['products']=Producto::select('productos.Name', 'productos.Description', 'productos.PriceSell', 'productos.PricePurchase', 'categories.Name AS category')
+        ->join('categories', 'productos.category_id', '=', 'categories.id')
+        ->get(); // or first()
+
+        return view('products.index', $datos);
     }
 
     /**
@@ -25,6 +31,9 @@ class ProductoController extends Controller
     public function create()
     {
         //
+        $categories = Categories::all();
+
+        return view('products.create', ['categories' => $categories]);
     }
 
     /**
@@ -36,6 +45,9 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $datosProd = request()->except('_token');
+        Producto::insert($datosProd);
+        return redirect('products')->with('mensaje', 'Producto agregado');
     }
 
     /**
