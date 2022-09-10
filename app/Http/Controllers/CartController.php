@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -12,78 +13,66 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+    public function addToCart($id)
+	{
+		$exist_product = DB::table('pos')->where('product_id', $id)->first();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+		if ($exist_product) {
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-         $datosCart = request()->except('_token');
+			DB::table('pos')->where('product_id', $id)->increment('product_quantity');
 
-        Cart::insert($datosCart);
-        return redirect('home')->with('mensaje', 'Categoria agregada');
-    }
+			$product = DB::table('pos')->where('product_id', $id)->first();
+			$sub_total = $product->product_price * $product->product_quantity;
+			DB::table('pos')->where('product_id', $id)->update(['sub_total' => $sub_total]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
+			// $product = Product::find($id);
+			// $product->product_quantity -= 1;
+			// $product->save();
+		} else {
+			$product = DB::table('products')->where('id', $id)->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
+			$data = [];
+			$data['product_id'] = $id;
+			$data['product_name'] = $product->product_name;
+			$data['product_quantity'] = 1;
+			$data['product_price'] = $product->selling_price;;
+			$data['sub_total'] = $product->selling_price;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
+			DB::table('pos')->insert($data);
+		}
+	}public function cartProducts()
+	{
+		$products = DB::table('pos')->get();
+		return response()->json($products);
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cart $cart)
-    {
-        //
-    }
+	public function cartDelete($id)
+	{
+		DB::table('pos')->where('id', $id)->delete();
+		return response('Done');
+	}
+
+	public function increment($id)
+	{
+		$quantity = DB::table('pos')->where('id', $id)->increment('product_quantity');
+
+		$product = DB::table('pos')->where('id', $id)->first();
+		$sub_total = $product->product_price * $product->product_quantity;
+		DB::table('pos')->where('id', $id)->update(['sub_total' => $sub_total]);
+	}
+
+	public function decrement($id)
+	{
+		$quantity = DB::table('pos')->where('id', $id)->decrement('product_quantity');
+
+		$product = DB::table('pos')->where('id', $id)->first();
+		$sub_total = $product->product_price * $product->product_quantity;
+		DB::table('pos')->where('id', $id)->update(['sub_total' => $sub_total]);
+	}
+
+	public function vat()
+	{
+		$vat = DB::table('extra')->first();
+		return response()->json($vat);
+	}
 }
