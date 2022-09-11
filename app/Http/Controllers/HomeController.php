@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clients;
-use App\Models\Producto;
+use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
 
@@ -27,14 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $clients=Clients::all();
-        $products=Producto::all();
-        $cart=Producto::select('productos.Name', 'productos.PriceSell', 'carts.Quantity')
-        ->join('carts', 'productos.id', '=', 'carts.product_id')
-        ->get(); // or first()
+        $todaySells=DB::table('orders')
+        ->join('customers', 'orders.customer_id', 'customers.id')
+        ->where('orders.order_date', date('d/m/Y'))
+        ->select('customers.name', 'orders.*')
+        ->orderBy('orders.id', 'desc')
+        ->toSql();
+        $todayIncome = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('pay');
+        $todayDue = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('due');
+        $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
+
+        $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();
 
 
 
-        return view('home')->with(compact('clients', 'products', 'cart'));
+        return view('home')->with(compact('todaySells', 'todayIncome', 'todayDue', 'expenses', 'stockOutProducts'));
     }
 }

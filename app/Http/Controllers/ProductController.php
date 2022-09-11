@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Model\Product;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -24,7 +26,7 @@ class ProductController extends Controller
         ->orderBy('products.id', 'desc')
         ->get();
 
-        return response()->json($products);
+        return view('products.index')->with(compact('products'));
     }
 
     /**
@@ -84,6 +86,13 @@ class ProductController extends Controller
             $product->product_quantity = $request->product_quantity;
             $product->save();
         }
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return view('products.create')->with(compact('categories', 'suppliers'));
     }
 
     /**
