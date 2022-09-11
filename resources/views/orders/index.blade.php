@@ -143,9 +143,16 @@
                     <div class="card mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h5 class="m-0 font-weight-bold text-primary">Products</h5>
-
-                            <input type="text" placeholder="Search" v-model="searchTerm" class="form-control"
-                                style="width: 300px;">
+                            <form class="form-inline" method="GET">
+                                <div class="form-group mb-2">
+                                    <label for="filter" class="col-sm-2 col-form-label">Filter</label>
+                                    <input type="text" class="form-control" id="filter" name="filter"
+                                        placeholder="Product name..." value="{{ $filter }}">
+                                </div>
+                                <button type="submit" class="btn btn-default mb-2">Filter</button>
+                            </form>
+                            <input type="text" placeholder="Search" v-model="searchTerm" id="searchTerm"
+                                class="form-control" style="width: 300px;" onkeypress="myFunction()">
                         </div>
 
 
@@ -188,3 +195,8 @@
 
     </div>
 @endsection
+<script>
+    function myFunction() {
+        document.getElementById("searchTerm").style.backgroundColor = "red";
+    }
+</script>

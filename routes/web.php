@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PurchaseController;
@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Route::resource('products', ProductController::class);
-Route::resource('categories', CategoriesController::class);
+Route::resource('categories', CategoryController::class);
 Route::resource('clients', ClientsController::class);
 Route::resource('debts', DebtsController::class);
 Route::resource('purchase', DebtsController::class);

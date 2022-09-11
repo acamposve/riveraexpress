@@ -13,8 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $filter = $request->query('filter');
+        $filtersearch = Product::all();
+        if (!empty($filter)) {
+            $filtersearch = $filtersearch->where('product_name', 'like', '%'.$filter.'%');
+
+        }
+        //dd($filtersearch);
         $products=Pos::all();
         $customers=Customer::all();
         $categories = Category::all();
@@ -27,9 +34,9 @@ class OrderController extends Controller
 
         $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();
 
-        $filtersearch=Product::all();
 
-        return view('orders.index')->with(compact('products', 'customers', 'categories', 'catProducts', 'vats', 'filtersearch'));
+
+        return view('orders.index')->with(compact('products', 'filter', 'customers', 'categories', 'catProducts', 'vats', 'filtersearch'));
     }
 
 
