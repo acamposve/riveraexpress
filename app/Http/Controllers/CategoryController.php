@@ -15,7 +15,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->json($categories);
+        return view('categories.index')->with(compact('categories'));
+
+
     }
 
     /**
@@ -32,6 +34,12 @@ class CategoryController extends Controller
             $category = new Category;
             $category->category_name = $request->category_name;
             $category->save();
+    }
+
+    public function create()
+    {
+
+        return view('categories.create');
     }
 
     /**

@@ -63,6 +63,62 @@
                         <span class="nav-link-text ms-1">Deudas</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap" aria-expanded="true" aria-controls="collapseBootstrap">
+                        <i class="far fa fa-users"></i>
+                        <span>Employee</span>
+                    </a>
+                    <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <router-link class="collapse-item" to="/store-employee">Add Employee</router-link>
+                            <router-link class="collapse-item" to="/employee">All Employee</router-link>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap1" aria-expanded="true" aria-controls="collapseBootstrap1">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Supplier</span>
+                    </a>
+                    <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <router-link class="collapse-item" to="/store-supplier">Add Supplier</router-link>
+                            <router-link class="collapse-item" to="supplier">All Supplier</router-link>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap5" aria-expanded="true"
+                        aria-controls="collapseBootstrap5">
+                        <i class="far fa fa-credit-card"></i>
+                        <span>Salary</span>
+                    </a>
+                    <div id="collapseBootstrap5" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <router-link class="collapse-item" to="/given-salary">Add Salary</router-link>
+                            <router-link class="collapse-item" to="salary">All Salary</router-link>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="nav-link text-white ">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
 
             </ul>
         </div>
