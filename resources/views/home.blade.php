@@ -1,222 +1,273 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid py-4">
+    <div>
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+        </div>
+
+        <div class="row mb-3">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Today Sell Amount</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">${{ $todaySells }}</div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                                    <span>Since last month</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Earnings (Annual) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Today Income</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">${{ $todayIncome }}</div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                                    <span>Since last years</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- New User Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Today Due</div>
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${{ $todayDue }}</div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
+                                    <span>Since last month</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users fa-2x text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Expense Amount</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">${{ $expenses }}</div>
+                                <div class="mt-2 mb-0 text-muted text-xs">
+                                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                                    <span>Since yesterday</span>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-comments fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">weekend</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                            <h4 class="mb-0">$53k</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                            <h4 class="mb-0">2,300</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+3% </span>than last month
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">person</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                            <h4 class="mb-0">3,462</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-                <div class="card">
-                    <div class="card-header p-3 pt-2">
-                        <div
-                            class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                            <i class="material-icons opacity-10">weekend</i>
-                        </div>
-                        <div class="text-end pt-1">
-                            <p class="text-sm mb-0 text-capitalize">Sales</p>
-                            <h4 class="mb-0">$103,430</h4>
-                        </div>
-                    </div>
-                    <hr class="dark horizontal my-0">
-                    <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-lg-12 col-md-6 mt-4 mb-4">
-                <div class="card z-index-2 ">
-                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                        <h6>Realizar Venta</h6>
-                    </div>
-                    <div class="card-body">
-                        <hr class="dark horizontal">
-
-                        <form action="{{ url('cart') }}" method="POST">
-                            <input type="hidden" name="active" id="active" value="1">
-                            @csrf
-                            <table style="width: 100%">
-                                <tr>
-                                    <td>
-                                        Seleccione Producto
-                                    </td>
-                                    <td>
-                                        <select name='product_id' v-model='form.product_id' class='form-control'
-                                            style="background-color: white">
-                                            <option value=''>Please choose one...</option>
-                                            @foreach ($products as $product)
-                                                <option value='{{ $product->id }}'>{{ $product->Name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                    </td>
-                                    <td>
-                                        Cantidad:
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control" name="quantity" id="quantity"
-                                            style="background-color: white">
-                                    </td>
-                                    <td>
-                                        <input type="submit" value="Agregar Producto" class="btn btn-success">
-                                    </td>
-                                </tr>
-                            </table>
+            <div class="col-xl-8 col-lg-7">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">Products</h5>
+                        <form class="form-inline" method="GET">
+                            <div class="form-group mb-2">
+                                <label for="filter" class="col-sm-2 col-form-label">Filter</label>
+                                <input type="text" class="form-control" id="filter" name="filter"
+                                    placeholder="Product name..." value="{{ $filter }}">
+                            </div>
+                            <button type="submit" class="btn btn-default mb-2">Filter</button>
                         </form>
-
+                        <input type="text" placeholder="Search" v-model="searchTerm" id="searchTerm"
+                            class="form-control" style="width: 300px;" onkeypress="myFunction()">
                     </div>
+
+
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ($filtersearch as $product)
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                    <div class="card" style="align-items: center; margin-bottom: 10px">
+                                        <button class="btn btn-sm" @click.prevent="addToCart(product.id)">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">
+                                                    {{ $product->product_name }} -
+                                                    {{ $product->selling_price }}$</h5>
+
+                                                @if ($product->product_quantity >= 1)
+                                                    <td><span class="badge badge-success">Available
+                                                            <span
+                                                                class="badge badge-light">{{ $product->product_quantity }}</span></span>
+                                                    </td>
+                                                @else
+                                                    <td><span class="badge badge-danger">Stock
+                                                            Out</span></td>
+                                                @endif
+
+
+
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-lg-12 col-md-6 mt-4 mb-4">
-                <div class="card z-index-2 ">
-                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                        <h6>Venta en proceso</h6>
+
+            <div class="col-xl-4 col-lg-5">
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">Expense Insert</h5>
+                        <a href="" class="btn btn-primary btn-sm">Add Customer</a>
                     </div>
                     <div class="card-body">
-                        <hr class="dark horizontal">
-
-                        <form action="{{ url('cart') }}" method="POST">
-                            <input type="hidden" name="active" id="active" value="1">
-                            @csrf
-                            <table style="width: 100%; border:1">
-                                <tr>
-                                    <td>Producto</td>
-                                    <td>Precio</td>
-                                    <td>Cantidad</td>
-                                    <td>SubTotal</td>
-                                </tr>
-                                <?php $sumatoria = 0; ?>
-                                @foreach ($cart as $carrito)
+                        <div class="table-responsive" style="font-size: 12px">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
                                     <tr>
-                                        <td>
-                                            {{ $carrito->Name }}
-                                        </td>
-                                        <td> {{ $carrito->PriceSell }}
-                                        </td>
-                                        <td>
-                                            {{ $carrito->Quantity }}
-                                        </td>
-                                        <td>
-                                            {{ number_format($carrito->Quantity * $carrito->PriceSell, 2) }}
-                                        </td>
+                                        <th>Name</th>
+                                        <th>Qty</th>
+                                        <th>Unit</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
                                     </tr>
-                                    <?php $sumatoria = $sumatoria + $carrito->Quantity * $carrito->PriceSell; ?>
-                                @endforeach
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>Total:</td>
-                                    <td>{{ number_format($sumatoria, 2) }}</td>
-                                </tr>
-                                <tr>
-                                    <td> <input type="submit" value="Cerrar Venta" class="btn btn-success">
-                                    </td>
-                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $cartProduct)
+                                        <tr v-for="product in cartProduct" :key="product.id">
+                                            <td>{{ $cartProduct->product_name }}</td>
+                                            <td>
+                                                <div
+                                                    class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                                                    <span class="input-group-btn input-group-prepend">
+                                                        @if ($cartProduct->product_quantity >= 2)
+                                                            <button @click.prevent="decrement(product.id)"
+                                                                class="btn btn-primary btn-sm bootstrap-touchspin-down"
+                                                                type="button">-</button>
+                                                        @else
+                                                            <button @click.prevent="decrement(product.id)"
+                                                                class="btn btn-primary btn-sm bootstrap-touchspin-down"
+                                                                type="button" disabled="">-</button>
+                                                        @endif
+                                                    </span>
+                                                    <input type="text" readonly class="form-control"
+                                                        value="{{ $cartProduct->product_quantity }}"
+                                                        style="width: 28px;">
+                                                    <span class="input-group-btn input-group-append">
+                                                        <button @click.prevent="increment(product.id)"
+                                                            class="btn btn-primary btn-sm bootstrap-touchspin-up"
+                                                            type="button">+</button>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>{{ $cartProduct->product_price }}</td>
+                                            <td>{{ $cartProduct->sub_total }}$</td>
+                                            <td><a @click="deleteItem(product.id)" class="btn btn-sm btn-danger"
+                                                    style="color: white;">X</a></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
-                        </form>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="order-md-2 mb-4">
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">Total Quantity</h6>
+                                    </div>
+                                    <span class="text-muted">{{ $cartProduct->sum('product_quantity') }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">Sub Total</h6>
+                                    </div>
+                                    <span class="text-muted">$ {{ $cartProduct->sum('sub_total') }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                    <div>
+                                        <h6 class="my-0">Vat</h6>
+                                    </div>
+                                    <span class="text-muted">{{ $vats->vat }}%</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <div class="text-success">
+                                        <h6 class="my-0">Total (USD)</h6>
+                                    </div>
+                                    @php
+                                        $subtotal = $cartProduct->sum('sub_total');
+                                        $impuesto = $vats->vat / 100;
+                                        $total = $subtotal * $impuesto + $subtotal;
+                                    @endphp
+                                    <span class="text-success">${{ $total }}</span>
+                                </li>
+                            </ul>
 
+                            <form @submit.prevent="orderDone">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Select Customer</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" v-model="customer_id">
+                                        @foreach ($customers as $customer)
+                                            <option value="{{ $customer->id }}">{{ $customer->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Pay</label>
+                                    <input type="text" class="form-control" v-model="pay"
+                                        id="exampleFormControlInput1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput2">Due</label>
+                                    <input type="text" class="form-control" v-model="due"
+                                        id="exampleFormControlInput2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect2">Pay By</label>
+                                    <select class="form-control" id="exampleFormControlSelect2" v-model="payBy">
+                                        <option value="Cheque">Cheque</option>
+                                        <option value="Hand Cash">Hand Cash</option>
+                                        <option value="Gift Card">Gift Card</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    </div>
-    <footer class="footer py-4  ">
-        <div class="container-fluid">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-lg-6 mb-lg-0 mb-4">
-                    <div class="copyright text-center text-sm text-muted text-lg-start">
-                        ©
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>,
-                        made with <i class="fa fa-heart"></i> by
-                        <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                            Tim</a>
-                        for a better web.
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative
-                                Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                target="_blank">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                target="_blank">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                target="_blank">License</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
     </div>
 @endsection
