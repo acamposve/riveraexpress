@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
@@ -29,10 +29,10 @@ Route::get('/', function () {
 });
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
-Route::resource('clients', ClientsController::class);
+Route::resource('customers', CustomerController::class);
 Route::resource('debts', DebtsController::class);
 Route::resource('purchase', DebtsController::class);
-Route::resource('sale', OrderController::class);
+Route::resource('orders', OrderController::class);
 Route::resource('providers', ProvidersController::class);
 Route::resource('cart', CartController::class);
 Route::resource('suppliers', SupplierController::class);

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Clients;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class ClientsController extends Controller
+/**
+ * Class CustomerController
+ * @package App\Http\Controllers
+ */
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,129 +18,92 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
-        return response()->json($customers);
+        $customers = Customer::paginate();
+
+        return view('customer.index', compact('customers'))
+            ->with('i', (request()->input('page', 1) - 1) * $customers->perPage());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $customer = new Customer();
+        return view('customer.create', compact('customer'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:customers|max:80',
-            'email' => 'required',
-            'phone' => 'required|unique:customers',
-        ]);
+        request()->validate(Customer::$rules);
 
-        if ($request->photo) {
-            $position = strpos($request->photo, ';');
-            $sub = substr($request->photo, 0, $position);
-            $ext = explode('/', $sub)[1];
+        $customer = Customer::create($request->all());
 
-            $name = time().'.'.$ext;
-            $img = Image::make($request->photo)->resize(240, 200);
-
-            $upload_path = 'backend/customer/';
-            $image_url = $upload_path.$name;
-            $img->save($image_url);
-
-            $customer = new Customer;
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->photo = $image_url;
-            $customer->save();
-        } else {
-            $customer = new Customer;
-            $customer->name = $request->name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->address = $request->address;
-            $customer->save();
-        }
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $customer = Customer::findOrFail($id);
-        return response()->json($customer);
+        $customer = Customer::find($id);
+
+        return view('customer.show', compact('customer'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $customer = Customer::find($id);
+
+        return view('customer.edit', compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Customer $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Customer $customer)
     {
-        $request->validate([
-            'name' => 'required|max:80',
-            'email' => 'required',
-            'phone' => 'required',
-        ]);
+        request()->validate(Customer::$rules);
 
-        $customer = Customer::findOrFail($id);
-        $customer->name = $request->name;
-        $customer->email = $request->email;
-        $customer->phone = $request->phone;
-        $customer->address = $request->address;
+        $customer->update($request->all());
 
-        if ($image = $request->newPhoto) {
-            $position = strpos($image, ';');
-            $sub = substr($image, 0, $position);
-            $ext = explode('/', $sub)[1];
-
-            $name = time().'.'.$ext;
-            $img = Image::make($image)->resize(240, 200);
-
-            $upload_path = 'backend/customer/';
-            $image_url = $upload_path.$name;
-            $img->save($image_url);
-
-            if ($customer->photo) {
-                unlink($customer->photo);
-
-                $customer->photo = $image_url;
-                $customer->save();
-            } else {
-                $customer->photo = $image_url;
-                $customer->save();
-            }
-
-        } else {
-            $customer->save();
-        }
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        $customer = Customer::findOrFail($id);
-        $photo = $customer->photo;
+        $customer = Customer::find($id)->delete();
 
-        if ($photo) {
-            unlink($photo);
-            $customer->delete();
-        }else{
-            $customer->delete();
-        }
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer deleted successfully');
     }
 }

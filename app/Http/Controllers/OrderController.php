@@ -2,88 +2,108 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Customer;
-use App\Models\Pos;
-use App\Models\Product;
-use App\Models\Cart;
-use Illuminate\Support\Facades\DB;
 
-
+/**
+ * Class OrderController
+ * @package App\Http\Controllers
+ */
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $filter = $request->query('filter');
-        $filtersearch = Product::all();
-        if (!empty($filter)) {
-            $filtersearch = $filtersearch->where('product_name', 'like', '%'.$filter.'%');
+        $orders = Order::paginate();
 
-        }
-        //dd($filtersearch);
-        $products=Pos::all();
-        $customers=Customer::all();
-        $categories = Category::all();
-        $vats = DB::table('extra')->first();
-        $catProducts = DB::table('products')
-        ->join('categories', 'products.category_id', 'categories.id')
-        ->select('products.id','products.product_name', 'products.selling_price', 'products.product_quantity')
-        ->get();
-        $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
-
-        $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();
-
-
-
-        return view('orders.index')->with(compact('products', 'filter', 'customers', 'categories', 'catProducts', 'vats', 'filtersearch'));
+        return view('order.index', compact('orders'))
+            ->with('i', (request()->input('page', 1) - 1) * $orders->perPage());
     }
 
-
-    public function todayOrder()
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-    	$orders = DB::table('orders')
-    				->join('customers', 'orders.customer_id', 'customers.id')
-    				->where('orders.order_date', date('d/m/Y'))
-    				->select('customers.name', 'orders.*')
-    				->orderBy('orders.id', 'desc')
-    				->get();
-    	return response()->json($orders);
+        $order = new Order();
+        return view('order.create', compact('order'));
     }
 
-    public function orders($id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-    	$orders = DB::table('orders')
-    				->join('customers', 'orders.customer_id', 'customers.id')
-    				->where('orders.id', $id)
-    				->select('customers.name', 'customers.phone', 'customers.address', 'orders.*')
-    				->first();
+        request()->validate(Order::$rules);
 
-    	return response()->json($orders);
+        $order = Order::create($request->all());
+
+        return redirect()->route('orders.index')
+            ->with('success', 'Order created successfully.');
     }
 
-    public function orderDetails($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-    	$details = DB::table('order_details')
-    				->join('products', 'order_details.product_id', 'products.id')
-    				->where('order_details.order_id', $id)
-    				->select('products.product_name', 'products.product_code', 'products.image', 'order_details.*')
-    				->get();
-    	return response()->json($details);
+        $order = Order::find($id);
+
+        return view('order.show', compact('order'));
     }
 
-    public function searchOrder(Request $request){
-    	$orderdate = $request->date;
-    	$newdate = new DateTime($orderdate);
-    	$done = $newdate->format('d/m/Y');
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $order = Order::find($id);
 
-    	$order = DB::table('orders')
-    	->join('customers','orders.customer_id','customers.id')
-    	->select('customers.name','orders.*')
-    	->where('orders.order_date',$done)
-    	->get();
+        return view('order.edit', compact('order'));
+    }
 
-    	return response()->json($orderdate);
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  Order $order
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Order $order)
+    {
+        request()->validate(Order::$rules);
 
+        $order->update($request->all());
+
+        return redirect()->route('orders.index')
+            ->with('success', 'Order updated successfully');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $order = Order::find($id)->delete();
+
+        return redirect()->route('orders.index')
+            ->with('success', 'Order deleted successfully');
     }
 }

@@ -6,10 +6,11 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use Intervention\Image\Facades\Image;
 
+/**
+ * Class ProductController
+ * @package App\Http\Controllers
+ */
 class ProductController extends Controller
 {
     /**
@@ -19,176 +20,98 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')
-        ->join('categories', 'products.category_id', 'categories.id')
-        ->join('suppliers', 'products.supplier_id', 'suppliers.id')
-        ->select('products.*', 'categories.category_name', 'suppliers.name')
-        ->orderBy('products.id', 'desc')
-        ->get();
+        $products = Product::select('*')
+        ->join('categories', 'categories.id', '=', 'products.category_id')
+        ->join('suppliers', 'suppliers.id', '=', 'products.supplier_id')
+        ->paginate();
 
-        return view('products.index')->with(compact('products'));
+
+        return view('product.index', compact('products'))
+            ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $product = new Product();
+        return view('product.create', compact('product'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category_id'      => 'required',
-            'supplier_id'      => 'required',
-            'product_name'     => 'required',
-            'product_code'     => 'required|max:80',
-            'root'             => 'required|max:80',
-            'buying_price'     => 'required|max:80',
-            'selling_price'    => 'required|max:80',
-            'buying_date'      => 'required|max:80',
-            'product_quantity' => 'required',
-        ]);
+        request()->validate(Product::$rules);
 
-        if ($request->image) {
-            $position = strpos($request->image, ';');
-            $sub = substr($request->image, 0, $position);
-            $ext = explode('/', $sub)[1];
+        $product = Product::create($request->all());
 
-            $name = time().'.'.$ext;
-            $img = Image::make($request->image)->resize(240, 200);
-
-            $upload_path = 'backend/product/';
-            $image_url = $upload_path.$name;
-            $img->save($image_url);
-
-            $product = new Product;
-            $product->category_id = $request->category_id;
-            $product->supplier_id = $request->supplier_id;
-            $product->product_name = $request->product_name;
-            $product->product_code = $request->product_code;
-            $product->root = $request->root;
-            $product->buying_price = $request->buying_price;
-            $product->selling_price = $request->selling_price;
-            $product->buying_date = $request->buying_date;
-            $product->product_quantity = $request->product_quantity;
-            $product->image = $image_url;
-            $product->save();
-        } else {
-            $product = new Product;
-            $product->category_id = $request->category_id;
-            $product->supplier_id = $request->supplier_id;
-            $product->product_name = $request->product_name;
-            $product->product_code = $request->product_code;
-            $product->root = $request->root;
-            $product->buying_price = $request->buying_price;
-            $product->selling_price = $request->selling_price;
-            $product->buying_date = $request->buying_date;
-            $product->product_quantity = $request->product_quantity;
-            $product->save();
-        }
-    }
-
-    public function create()
-    {
-        $categories = Category::all();
-        $suppliers = Supplier::all();
-        return view('products.create')->with(compact('categories', 'suppliers'));
+        return redirect()->route('products.index')
+            ->with('success', 'Product created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        return response()->json($product);
+        $product = Product::find($id);
+
+        return view('product.show', compact('product'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        $product = Product::find($id);
+
+        return view('product.edit', compact('product', 'categories', 'suppliers'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $request->validate([
-            'category_id'      => 'required',
-            'supplier_id'      => 'required',
-            'product_name'     => 'required',
-            'product_code'     => 'required|max:80',
-            'root'             => 'required|max:80',
-            'buying_price'     => 'required|max:80',
-            'selling_price'    => 'required|max:80',
-            'buying_date'      => 'required|max:80',
-            'product_quantity' => 'required',
-        ]);
+        request()->validate(Product::$rules);
 
-        $product = Product::findOrFail($id);
-        $product->category_id = $request->category_id;
-        $product->supplier_id = $request->supplier_id;
-        $product->product_name = $request->product_name;
-        $product->product_code = $request->product_code;
-        $product->root = $request->root;
-        $product->buying_price = $request->buying_price;
-        $product->selling_price = $request->selling_price;
-        $product->buying_date = $request->buying_date;
-        $product->product_quantity = $request->product_quantity;
+        $product->update($request->all());
 
-        if ($image = $request->newImage) {
-            $position = strpos($image, ';');
-            $sub = substr($image, 0, $position);
-            $ext = explode('/', $sub)[1];
-
-            $name = time().'.'.$ext;
-            $img = Image::make($image)->resize(240, 200);
-
-            $upload_path = 'backend/product/';
-            $image_url = $upload_path.$name;
-            $newImage = $img->save($image_url);
-
-            if ($newImage) {
-                unlink($product->image);
-
-                $product->image = $image_url;
-                $product->save();
-            }
-
-        } else {
-            $product->save();
-        }
+        return redirect()->route('products.index')
+            ->with('success', 'Product updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $image = $product->image;
+        $product = Product::find($id)->delete();
 
-        if ($image) {
-            unlink($image);
-            $product->delete();
-        }else{
-            $product->delete();
-        }
-    }
-
-    public function updateStock($id)
-    {
-        request()->validate([
-            'product_quantity' => 'required|numeric'
-        ]);
-        $product = Product::findOrFail($id);
-        $product->product_quantity = request()->product_quantity;
-        $product->save();
+        return redirect()->route('products.index')
+            ->with('success', 'Product deleted successfully');
     }
 }

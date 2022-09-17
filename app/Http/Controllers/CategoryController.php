@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+/**
+ * Class CategoryController
+ * @package App\Http\Controllers
+ */
 class CategoryController extends Controller
 {
     /**
@@ -14,72 +18,92 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('categories.index')->with(compact('categories'));
+        $categories = Category::paginate();
 
+        return view('category.index', compact('categories'))
+            ->with('i', (request()->input('page', 1) - 1) * $categories->perPage());
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $category = new Category();
+        return view('category.create', compact('category'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category_name' => 'required|unique:categories|max:50',
-        ]);
-            $category = new Category;
-            $category->category_name = $request->category_name;
-            $category->save();
-    }
+        request()->validate(Category::$rules);
 
-    public function create()
-    {
+        $category = Category::create($request->all());
 
-        return view('categories.create');
+        return redirect()->route('categories.index')
+            ->with('success', 'Category created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return response()->json($category);
+        $category = Category::find($id);
+
+        return view('category.show', compact('category'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $category = Category::find($id);
+
+        return view('category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $request->validate([
-            'category_name' => 'required|unique:categories|max:80',
-        ]);
+        request()->validate(Category::$rules);
 
-        $category = Category::findOrFail($id);
-        $category->category_name = $request->category_name;
-        $category->save();
+        $category->update($request->all());
+
+        return redirect()->route('categories.index')
+            ->with('success', 'Category updated successfully');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
+        $category = Category::find($id)->delete();
+
+        return redirect()->route('categories.index')
+            ->with('success', 'Category deleted successfully');
     }
 }
