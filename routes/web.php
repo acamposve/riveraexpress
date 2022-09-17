@@ -10,6 +10,8 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProvidersController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\EmployeeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,7 @@ Route::resource('sale', OrderController::class);
 Route::resource('providers', ProvidersController::class);
 Route::resource('cart', CartController::class);
 Route::resource('suppliers', SupplierController::class);
+Route::resource('employees', EmployeeController::class);
 
 Auth::routes();
 
