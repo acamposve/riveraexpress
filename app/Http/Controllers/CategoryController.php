@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,9 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->json($categories);
+        return view('categories.index')->with(compact('categories'));
+
+
     }
 
     /**
@@ -32,6 +34,12 @@ class CategoriesController extends Controller
             $category = new Category;
             $category->category_name = $request->category_name;
             $category->save();
+    }
+
+    public function create()
+    {
+
+        return view('categories.create');
     }
 
     /**
