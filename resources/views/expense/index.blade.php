@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Category
+    Expense
 @endsection
 
 @section('content')
@@ -13,15 +13,14 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Category') }}
+                                {{ __('Expense') }}
                             </span>
 
-                            <div class="float-right">
-                                <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Create New') }}
+                             <div class="float-right">
+                                <a href="{{ route('expenses.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
-                            </div>
+                              </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -32,36 +31,34 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover" style="width: 100%">
+                            <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-                                        <th>Category Name</th>
+                                        
+										<th>Details</th>
+										<th>Amount</th>
+										<th>Expense Date</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($expenses as $expense)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-                                            <td>{{ $category->category_name }}</td>
+                                            
+											<td>{{ $expense->details }}</td>
+											<td>{{ $expense->amount }}</td>
+											<td>{{ $expense->expense_date }}</td>
 
                                             <td>
-                                                <form action="{{ route('categories.destroy', $category->id) }}"
-                                                    method="POST">
-                                                    <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('categories.show', $category->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('categories.edit', $category->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('expenses.destroy',$expense->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('expenses.show',$expense->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('expenses.edit',$expense->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -71,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $categories->links() !!}
+                {!! $expenses->links() !!}
             </div>
         </div>
     </div>

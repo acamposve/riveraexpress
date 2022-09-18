@@ -12,6 +12,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ExpenseController;
 
 
 /*
@@ -37,6 +38,7 @@ Route::resource('cart', CartController::class);
 Route::resource('suppliers', SupplierController::class);
 Route::resource('employees', EmployeeController::class);
 Route::resource('pos', PosController::class);
+Route::resource('expenses', ExpenseController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -53,7 +53,7 @@ class HomeController extends Controller
 
 
         $todayIncome = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('pay');
-        $todayDue = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('due');
+        $todayDue = DB::table('orders')->where('order_month', date('F'))->sum('due');
         $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
 
         $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();
