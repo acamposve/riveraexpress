@@ -11,13 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property $details
  * @property $amount
  * @property $expense_date
+ * @property $product_id
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Expense extends Model
 {
-    
+
     static $rules = [
     ];
 
@@ -28,7 +29,7 @@ class Expense extends Model
      *
      * @var array
      */
-    protected $fillable = ['details','amount','expense_date'];
+    protected $fillable = ['details','amount','expense_date','product_id'];
 
 
 

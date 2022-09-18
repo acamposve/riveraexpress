@@ -32,22 +32,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('orders.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">receipt_long</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Ventas</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('products.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">shop</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Productos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('customers.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">emoji_people</i>
@@ -78,6 +62,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('products.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">shop</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Productos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('suppliers.index') }}">
                         <i class="material-icons opacity-10">local_shipping</i>
 
@@ -85,9 +77,14 @@
                     </a>
 
                 </li>
-
-
-
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('orders.index') }}">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">receipt_long</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Ventas</span>
+                    </a>
+                </li>
                 <li class="nav-link text-white ">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -99,9 +96,7 @@
                         @csrf
                     </form>
                 </li>
-
             </ul>
         </div>
     </aside>
-
 @endguest

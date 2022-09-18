@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 /**
@@ -19,8 +20,8 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::paginate();
-
-        return view('expense.index', compact('expenses'))
+$products = Product::all();
+        return view('expense.index', compact('expenses', 'products'))
             ->with('i', (request()->input('page', 1) - 1) * $expenses->perPage());
     }
 
@@ -31,8 +32,9 @@ class ExpenseController extends Controller
      */
     public function create()
     {
+        $products = Product::all();
         $expense = new Expense();
-        return view('expense.create', compact('expense'));
+        return view('expense.create', compact('expense', 'products'));
     }
 
     /**
@@ -44,9 +46,17 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         request()->validate(Expense::$rules);
+        $product = Product::find($request->product_id);
+
+        $newQty = $product->product_quantity + $request->product_qty;
+        $product->product_quantity =$newQty;
+        $product->selling_price =$request->selling_price;
+        $product->buying_price =$request->buying_price;
+        $product->save();
+        request()->merge([ 'expense_date' => date('d/m/Y') ]);
+
 
         $expense = Expense::create($request->all());
-
         return redirect()->route('expenses.index')
             ->with('success', 'Expense created successfully.');
     }
