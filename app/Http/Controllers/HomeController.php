@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use App\Model\Order;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Pos;
@@ -46,26 +46,7 @@ class HomeController extends Controller
         ->join('categories', 'products.category_id', 'categories.id')
         ->select('products.id','products.product_name', 'products.selling_price', 'products.product_quantity')
         ->get();
-        $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
 
-        $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();  $filter = $request->query('filter');
-        $filtersearch = Product::all();
-        if (!empty($filter)) {
-            $filtersearch = $filtersearch->where('product_name', 'like', '%'.$filter.'%');
-
-        }
-        //dd($filtersearch);
-        $products=Pos::all();
-        $customers=Customer::all();
-        $categories = Category::all();
-        $vats = DB::table('extra')->first();
-        $catProducts = DB::table('products')
-        ->join('categories', 'products.category_id', 'categories.id')
-        ->select('products.id','products.product_name', 'products.selling_price', 'products.product_quantity')
-        ->get();
-        $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
-
-        $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();
 
         $todaySells=Order::where('orders.order_date', date('d/m/Y'))
         ->count();
@@ -81,4 +62,6 @@ class HomeController extends Controller
 
         return view('home')->with(compact('products', 'customers', 'categories', 'catProducts', 'vats', 'filtersearch', 'todaySells',  'filter','todayIncome', 'todayDue', 'expenses', 'stockOutProducts', 'filtersearch'));
     }
+
+
 }
