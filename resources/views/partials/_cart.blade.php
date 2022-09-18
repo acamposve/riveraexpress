@@ -132,7 +132,7 @@
 <script>
     function sentDue() {
         var deuda = document.getElementById("total").value - document.getElementById("pay").value;
-        document.getElementById("due").value = (Math.round(deuda * 100) / 100).toFixed(2);;
+        document.getElementById("due").value = (Math.round(deuda * 100) / 100).toFixed(2);
 
     }
 </script>

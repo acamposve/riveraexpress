@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $amount
  * @property $expense_date
  * @property $product_id
+ * @property $product_qty
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
