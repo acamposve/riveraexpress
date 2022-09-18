@@ -17,7 +17,7 @@
             <!-- Form input fields here (do not forget your name attributes). -->
             <table>
                 <tr>
-                    <td>Nombre de Producto/SKU</td>
+                    <td>SKU</td>
                     <td><input type="text" id="searchParam" name="searchParam" class="form-control"></td>
                 </tr>
             </table>
