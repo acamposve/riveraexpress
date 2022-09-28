@@ -13,7 +13,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpenseController;
-
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\DebtsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::resource('suppliers', SupplierController::class);
 Route::resource('employees', EmployeeController::class);
 Route::resource('pos', PosController::class);
 Route::resource('expenses', ExpenseController::class);
+Route::resource('reports', ReportsController::class);
+Route::resource('debts', DebtsController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

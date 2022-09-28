@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Product
+    Productos
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Product') }}
+                                {{ __('Productos') }}
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Agregar') }}
                                 </a>
                               </div>
                         </div>
@@ -36,12 +36,11 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Product Name</th>
-										<th>Selling Price</th>
-										<th>Buying Price</th>
-										<th>Category Id</th>
-										<th>Supplier Id</th>
-										<th>Product Quantity</th>
+										<th>Producto</th>
+										<th>Precio de venta</th>
+										<th>Categoria</th>
+										<th>Proveedor</th>
+										<th>Cantidad</th>
 
                                         <th></th>
                                     </tr>
@@ -53,18 +52,16 @@
 
 											<td>{{ $product->product_name }}</td>
 											<td>{{ $product->selling_price }}</td>
-											<td>{{ $product->buying_price }}</td>
 											<td>{{ $product->category_name }}</td>
 											<td>{{ $product->name }}</td>
 											<td>{{ $product->product_quantity }}</td>
 
                                             <td>
                                                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('products.show',$product->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Debts;
+use App\Models\Reports;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-class DebtsController extends Controller
+
+class ReportsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +17,13 @@ class DebtsController extends Controller
     public function index()
     {
         //
-        $debts = DB::table('orders')
-                ->where('due', '>', 0)
-                ->get();
-                return view('debts.index')->with(compact('debts'));
+        $todayIncome = DB::table('orders')->where('order_date', date('d/m/Y'))->sum('pay');
+        $todayDue = DB::table('orders')->where('order_month', date('F'))->sum('due');
+        $expenses = DB::table('expenses')->where('expense_date', date('Y-m-d'))->sum('amount');
 
+        $todaySells=Order::where('orders.order_date', date('d/m/Y'))
+        ->count();
+        return view('reports.index')->with(compact('todaySells','todayIncome', 'todayDue', 'expenses'));
     }
 
     /**
@@ -46,10 +50,10 @@ class DebtsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function show(Debts $debts)
+    public function show(Reports $reports)
     {
         //
     }
@@ -57,10 +61,10 @@ class DebtsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function edit(Debts $debts)
+    public function edit(Reports $reports)
     {
         //
     }
@@ -69,10 +73,10 @@ class DebtsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Debts $debts)
+    public function update(Request $request, Reports $reports)
     {
         //
     }
@@ -80,10 +84,10 @@ class DebtsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Reports  $reports
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Debts $debts)
+    public function destroy(Reports $reports)
     {
         //
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Order;
+use App\Models\Bill;
 use App\Http\Controllers\Controller;
 
 class PosController extends Controller
@@ -18,10 +19,16 @@ class PosController extends Controller
 
 	public function store(Request $request)
 	{
+
+
         request()->merge([ 'order_date' => date('d/m/Y') ]);
         request()->merge([ 'order_month' => date('F') ]);
         request()->merge([ 'order_year' => date('Y') ]);
 
+        $bills  = new Bill;
+        $bills->name = $request->name;
+
+        $bills->save();
 
         $order = Order::create($request->all());
         $cartContents = DB::table('pos')->get();
@@ -43,7 +50,7 @@ class PosController extends Controller
 
 		DB::table('pos')->delete();
 
-		return response()->json('Done');
+        return redirect('/home');
 
 	}
 

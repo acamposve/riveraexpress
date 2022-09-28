@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Debts;
+use App\Models\Bill;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-class DebtsController extends Controller
+
+class BillController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,6 @@ class DebtsController extends Controller
     public function index()
     {
         //
-        $debts = DB::table('orders')
-                ->where('due', '>', 0)
-                ->get();
-                return view('debts.index')->with(compact('debts'));
-
     }
 
     /**
@@ -46,10 +41,10 @@ class DebtsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function show(Debts $debts)
+    public function show(Bill $bill)
     {
         //
     }
@@ -57,10 +52,10 @@ class DebtsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function edit(Debts $debts)
+    public function edit(Bill $bill)
     {
         //
     }
@@ -69,10 +64,10 @@ class DebtsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Debts $debts)
+    public function update(Request $request, Bill $bill)
     {
         //
     }
@@ -80,10 +75,10 @@ class DebtsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Debts  $debts
+     * @param  \App\Models\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Debts $debts)
+    public function destroy(Bill $bill)
     {
         //
     }

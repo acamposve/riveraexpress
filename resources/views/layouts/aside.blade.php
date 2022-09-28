@@ -23,6 +23,8 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
+
+
                 <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('categories.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -48,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="../pages/notifications.html">
+                    <a class="nav-link text-white " href="{{ route('debts.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">money_off</i>
                         </div>
@@ -74,6 +76,14 @@
                         <i class="material-icons opacity-10">local_shipping</i>
 
                         <span class="nav-link-text ms-1">Proveedores</span>
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="{{ route('reports.index') }}">
+                        <i class="material-icons opacity-10">local_shipping</i>
+
+                        <span class="nav-link-text ms-1">Reportes</span>
                     </a>
 
                 </li>
