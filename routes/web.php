@@ -15,6 +15,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DebtsController;
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\CoinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,8 @@ Route::resource('pos', PosController::class);
 Route::resource('expenses', ExpenseController::class);
 Route::resource('reports', ReportsController::class);
 Route::resource('debts', DebtsController::class);
+Route::resource('bills', BillController::class);
+Route::resource('coins', CoinController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

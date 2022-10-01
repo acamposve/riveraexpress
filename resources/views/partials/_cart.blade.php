@@ -121,49 +121,49 @@
                                         <h5 class="card-title">Entrada Billetes</h5>
                                         <div class="row">
                                             <div class="col-md-6">20$</div>
-                                            <div class="col-md-6"><input type="text" id="20" name="20"
+                                            <div class="col-md-6"><input type="text" id="e20" name="e20"
                                                     class="form-control"></div>
                                         </div>
                                         <div class="row">
 
                                             <div class="col-md-6">50$</div>
-                                            <div class="col-md-6"><input type="text" id="50" name="50"
+                                            <div class="col-md-6"><input type="text" id="e50" name="e50"
                                                     class="form-control"></div>
 
                                         </div>
                                         <div class="row">
 
                                             <div class="col-md-6">100$</div>
-                                            <div class="col-md-6"><input type="text" id="100" name="100"
+                                            <div class="col-md-6"><input type="text" id="e100" name="e100"
                                                     class="form-control"></div>
 
                                         </div>
                                         <div class="row">
 
                                             <div class="col-md-6">200$</div>
-                                            <div class="col-md-6"><input type="text" id="200"
-                                                    name="200" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e200"
+                                                    name="e200" class="form-control"></div>
 
                                         </div>
                                         <div class="row">
 
                                             <div class="col-md-6">500$</div>
-                                            <div class="col-md-6"><input type="text" id="500"
-                                                    name="500" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e500"
+                                                    name="e500" class="form-control"></div>
 
                                         </div>
                                         <div class="row">
 
                                             <div class="col-md-6">1000$</div>
-                                            <div class="col-md-6"><input type="text" id="1000"
-                                                    name="1000" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e1000"
+                                                    name="e1000" class="form-control"></div>
 
                                         </div>
                                         <div class="row">
 
                                             <div class="col-md-6">2000$</div>
-                                            <div class="col-md-6"><input type="text" id="2000"
-                                                    name="2000" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e2000"
+                                                    name="e2000" class="form-control"></div>
 
                                         </div>
                                     </div>
@@ -231,28 +231,28 @@
                                         <h5 class="card-title">Entrada Monedas</h5>
                                         <div class="row">
                                             <div class="col-md-6">1$</div>
-                                            <div class="col-md-6"><input type="text" id="20"
-                                                    name="20" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e1"
+                                                    name="e1" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">2$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e2"
+                                                    name="e2" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">5$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e5"
+                                                    name="e5" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">10$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="e10"
+                                                    name="e10" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">50$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="em50"
+                                                    name="em50" class="form-control"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -264,28 +264,28 @@
                                         <h5 class="card-title">Salida Monedas</h5>
                                         <div class="row">
                                             <div class="col-md-6">1$</div>
-                                            <div class="col-md-6"><input type="text" id="20"
-                                                    name="20" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="s1"
+                                                    name="s1" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">2$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="s2"
+                                                    name="s2" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">5$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="s5"
+                                                    name="s5" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">10$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="s10"
+                                                    name="s10" class="form-control"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">50$</div>
-                                            <div class="col-md-6"><input type="text" id="50"
-                                                    name="50" class="form-control"></div>
+                                            <div class="col-md-6"><input type="text" id="sm50"
+                                                    name="sm50" class="form-control"></div>
                                         </div>
                                     </div>
                                 </div>

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bill;
+use App\Models\Coin;
 use Illuminate\Http\Request;
 
 /**
- * Class BillController
+ * Class CoinController
  * @package App\Http\Controllers
  */
-class BillController extends Controller
+class CoinController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::paginate();
+        $coins = Coin::paginate();
 
-        return view('bill.index', compact('bills'))
-            ->with('i', (request()->input('page', 1) - 1) * $bills->perPage());
+        return view('coin.index', compact('coins'))
+            ->with('i', (request()->input('page', 1) - 1) * $coins->perPage());
     }
 
     /**
@@ -31,8 +31,8 @@ class BillController extends Controller
      */
     public function create()
     {
-        $bill = new Bill();
-        return view('bill.create', compact('bill'));
+        $coin = new Coin();
+        return view('coin.create', compact('coin'));
     }
 
     /**
@@ -43,12 +43,12 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Bill::$rules);
+        request()->validate(Coin::$rules);
 
-        $bill = Bill::create($request->all());
+        $coin = Coin::create($request->all());
 
-        return redirect()->route('bills.index')
-            ->with('success', 'Bill created successfully.');
+        return redirect()->route('coins.index')
+            ->with('success', 'Coin created successfully.');
     }
 
     /**
@@ -59,9 +59,9 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        $bill = Bill::find($id);
+        $coin = Coin::find($id);
 
-        return view('bill.show', compact('bill'));
+        return view('coin.show', compact('coin'));
     }
 
     /**
@@ -72,26 +72,26 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        $bill = Bill::find($id);
+        $coin = Coin::find($id);
 
-        return view('bill.edit', compact('bill'));
+        return view('coin.edit', compact('coin'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Bill $bill
+     * @param  Coin $coin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bill $bill)
+    public function update(Request $request, Coin $coin)
     {
-        request()->validate(Bill::$rules);
+        request()->validate(Coin::$rules);
 
-        $bill->update($request->all());
+        $coin->update($request->all());
 
-        return redirect()->route('bills.index')
-            ->with('success', 'Bill updated successfully');
+        return redirect()->route('coins.index')
+            ->with('success', 'Coin updated successfully');
     }
 
     /**
@@ -101,9 +101,9 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        $bill = Bill::find($id)->delete();
+        $coin = Coin::find($id)->delete();
 
-        return redirect()->route('bills.index')
-            ->with('success', 'Bill deleted successfully');
+        return redirect()->route('coins.index')
+            ->with('success', 'Coin deleted successfully');
     }
 }

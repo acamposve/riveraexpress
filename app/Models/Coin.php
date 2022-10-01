@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Bill
+ * Class Coin
  *
  * @property $id
  * @property $name
  * @property $quantity
+ * @property $created_at
+ * @property $updated_at
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Bill extends Model
+class Coin extends Model
 {
     
     static $rules = [
