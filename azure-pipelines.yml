@@ -30,9 +30,9 @@ steps:
     serverUrl: 'ftp://$(URL)'
     username: $(Login)
     password: ${env:PASSWORD}
-    rootDirectory: 'public_html'
+    rootDirectory: ''
     filePatterns: '**'
-    remoteDirectory: '/sistema'
+    remoteDirectory: '/public_html/sistema'
     clean: false
     cleanContents: false
     preservePaths: false
