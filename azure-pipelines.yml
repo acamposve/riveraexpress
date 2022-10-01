@@ -29,7 +29,7 @@ steps:
     credentialsOption: 'inputs'
     serverUrl: 'ftp://$(URL)'
     username: $(Login)
-    password: ${env:PASSWORD}
+    password: $(Password)
     rootDirectory: ''
     filePatterns: '**'
     remoteDirectory: '/public_html/sistema'
