@@ -29,7 +29,7 @@ steps:
     credentialsOption: 'inputs'
     serverUrl: 'riveraexpress.com.uy'
     username: 'rivera'
-    password: '2MP42qi!a'
+    password: ''
     rootDirectory: '/public_html'
     filePatterns: '**'
     remoteDirectory: '/sistema'
