@@ -24,3 +24,16 @@ steps:
 
 - script: composer install --no-interaction --prefer-dist
   displayName: 'composer install'
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'riveraexpress.com.uy'
+    username: 'rivera'
+    password: '2MP42qi!a'
+    rootDirectory: '/public_html'
+    filePatterns: '**'
+    remoteDirectory: '/sistema'
+    clean: false
+    cleanContents: false
+    preservePaths: false
+    trustSSL: false
