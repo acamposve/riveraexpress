@@ -16,7 +16,8 @@
                         <span class="card-title">Create Product</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('products.store') }}"  role="form" enctype="multipart/form-data">
+                        <script language="javascript">var p = false;</script>
+                        <form method="POST" action="{{ route('products.store') }}"  role="form" enctype="multipart/form-data" onsubmit = "return(p)">
                             @csrf
 
                             @include('product.form')

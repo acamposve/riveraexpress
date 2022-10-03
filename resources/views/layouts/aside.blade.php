@@ -23,22 +23,6 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('bills.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">table_view</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Billetes</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('coins.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">table_view</i>
-                        </div>
-                        <span class="nav-link-text ms-1">monedas</span>
-                    </a>
-                </li>
 
                 <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('categories.index') }}">
@@ -73,12 +57,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white " href="{{ route('employees.index') }}">
-                        <i class="material-icons opacity-10">account_box</i>
-                        <span class="nav-link-text ms-1">Empleados</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('products.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">shop</i>
@@ -94,6 +72,7 @@
                     </a>
 
                 </li>
+                @role('admin')
                 <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('reports.index') }}">
                         <i class="material-icons opacity-10">local_shipping</i>
@@ -102,6 +81,7 @@
                     </a>
 
                 </li>
+                @endrole
                 <li class="nav-item">
                     <a class="nav-link text-white " href="{{ route('orders.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

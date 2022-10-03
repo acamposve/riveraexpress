@@ -3,6 +3,13 @@
 @section('content')
     <div>
         <form id="contactForm1" action="{{ route('cart.store') }}" method="post" role="form" enctype="multipart/form-data">
+            @role('vendedor')
+            <p>Libre</p>
+            @endrole
+            @role('admin')
+            <p>Admin</p>
+            @endrole
+
             @csrf
             <!-- Form input fields here (do not forget your name attributes). -->
             <table>

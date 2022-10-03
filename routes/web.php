@@ -17,6 +17,8 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DebtsController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CoinController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +52,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/cart/delete/{id}', 'App\Http\Controllers\CartController@cartDelete');
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class);
+});

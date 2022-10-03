@@ -32,17 +32,14 @@
                                     <tr>
                                         <th>No</th>
 
-                                        <th>Customer Id</th>
-                                        <th>Qty</th>
-                                        <th>Sub Total</th>
-                                        <th>Vat</th>
+                                        <th>Cliente</th>
+                                        <th>Cantidad</th>
                                         <th>Total</th>
-                                        <th>Pay</th>
-                                        <th>Due</th>
-                                        <th>Payby</th>
-                                        <th>Order Date</th>
-                                        <th>Order Month</th>
-                                        <th>Order Year</th>
+                                        <th>Pagado</th>
+                                        <th>Deuda</th>
+                                        <th>Metodo de Pago</th>
+                                        <th>Fecha de la venta</th>
+                                        <th>Hora de la venta</th>
 
                                         <th></th>
                                     </tr>
@@ -56,17 +53,14 @@
                                         @endif
                                         <td>{{ ++$i }}</td>
 
-                                        <td>{{ $order->customer_id }}</td>
+                                        <td>{{ $order->name }} ({{ $order->nickname }})</td>
                                         <td>{{ $order->qty }}</td>
-                                        <td>{{ $order->sub_total }}</td>
-                                        <td>{{ $order->vat }}</td>
-                                        <td>{{ $order->total }}</td>
+                                       <td>{{ $order->total }}</td>
                                         <td>{{ $order->pay }}</td>
                                         <td>{{ $order->due }}</td>
                                         <td>{{ $order->payBy }}</td>
                                         <td>{{ $order->order_date }}</td>
-                                        <td>{{ $order->order_month }}</td>
-                                        <td>{{ $order->order_year }}</td>
+                                        <td>{{ $order->created_at->format('H:i:s') }}</td>
 
                                         <td>
                                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST">

@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('suppliers.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Agregar') }}
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -35,13 +35,8 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
+                                        
 										<th>Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-										<th>Address</th>
-										<th>Photo</th>
-										<th>Shopname</th>
 
                                         <th></th>
                                     </tr>
@@ -50,21 +45,16 @@
                                     @foreach ($suppliers as $supplier)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
+                                            
 											<td>{{ $supplier->name }}</td>
-											<td>{{ $supplier->email }}</td>
-											<td>{{ $supplier->phone }}</td>
-											<td>{{ $supplier->address }}</td>
-											<td>{{ $supplier->photo }}</td>
-											<td>{{ $supplier->shopName }}</td>
 
                                             <td>
                                                 <form action="{{ route('suppliers.destroy',$supplier->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('suppliers.show',$supplier->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('suppliers.edit',$supplier->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('suppliers.edit',$supplier->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -24,26 +24,6 @@
                             <strong>Name:</strong>
                             {{ $supplier->name }}
                         </div>
-                        <div class="form-group">
-                            <strong>Email:</strong>
-                            {{ $supplier->email }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Phone:</strong>
-                            {{ $supplier->phone }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Address:</strong>
-                            {{ $supplier->address }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Photo:</strong>
-                            {{ $supplier->photo }}
-                        </div>
-                        <div class="form-group">
-                            <strong>Shopname:</strong>
-                            {{ $supplier->shopName }}
-                        </div>
 
                     </div>
                 </div>

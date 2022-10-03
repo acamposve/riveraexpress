@@ -9,11 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $name
- * @property $email
- * @property $phone
- * @property $address
- * @property $photo
- * @property $shopName
  * @property $created_at
  * @property $updated_at
  *
@@ -25,9 +20,6 @@ class Supplier extends Model
     
     static $rules = [
 		'name' => 'required',
-		'email' => 'required',
-		'phone' => 'required',
-		'address' => 'required',
     ];
 
     protected $perPage = 20;
@@ -37,7 +29,7 @@ class Supplier extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','email','phone','address','photo','shopName'];
+    protected $fillable = ['name'];
 
 
 

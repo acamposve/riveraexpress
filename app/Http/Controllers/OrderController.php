@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::paginate();
+        $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')->paginate();
 
         return view('order.index', compact('orders'))
             ->with('i', (request()->input('page', 1) - 1) * $orders->perPage());
