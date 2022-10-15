@@ -38,6 +38,7 @@
 
 										<th>Producto</th>
 										<th>Precio de venta</th>
+                                        <th>Precio Noche</th>
 										<th>Categoria</th>
 										<th>Proveedor</th>
 										<th>Cantidad</th>
@@ -52,6 +53,7 @@
 
 											<td>{{ $product->product_name }}</td>
 											<td>{{ $product->selling_price }}</td>
+                                            <td>{{ $product->night_price }}</td>
 											<td>{{ $product->category_name }}</td>
 											<td>{{ $product->name }}</td>
 											<td>{{ $product->product_quantity }}</td>

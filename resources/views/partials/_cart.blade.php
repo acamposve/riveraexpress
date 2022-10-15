@@ -2,7 +2,7 @@
     @if (count($products) >= 1)
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h5 class="m-0 font-weight-bold text-primary">Venta en proceso</h5>
+                <h5 class="m-0 font-weight-bold text-primary">Venta en proceso (Usar Precio Noche)</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive" style="font-size: 12px">
@@ -12,14 +12,21 @@
                                 <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Precio Unitario</th>
+                             @if(now()->format('H:i:s') > 12)
+                             <th>Precio Noche</th>
+                               @endif
                                 <th>Total</th>
                                 <th>Acciones</th>
                             </tr>
+
+
+
                         </thead>
                         <tbody>
 
                             @foreach ($products as $cartProduct)
                                 <tr>
+
                                     <td>{{ $cartProduct->product_name }}</td>
                                     <td>
                                         <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
@@ -30,6 +37,9 @@
                                         </div>
                                     </td>
                                     <td>{{ $cartProduct->product_price }}</td>
+                                    @if(now()->format('H:i:s') > 12)
+                                     <td>{{ $cartProduct->night_price }}</td>
+                                     @endif
                                     <td>{{ $cartProduct->sub_total }} $</td>
                                     <td>
                                         <form action="{{ route('cart.destroy', $cartProduct->id) }}" method="POST">

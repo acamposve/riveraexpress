@@ -31,10 +31,10 @@
                     {{ Form::label('Categoria') }}
                     <select class="form-control" name="category_id">
                         @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->category_name}}</option>
+                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                         @endforeach
                     </select>
-                   {!! $errors->first('category_id', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('category_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     {{ Form::label('Proveedor') }}
                     <select class="form-control" name="supplier_id">
                         @foreach ($suppliers as $supplier)
-                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                            <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                         @endforeach
                     </select>{!! $errors->first('supplier_id', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -74,9 +74,20 @@
                     {!! $errors->first('product_quantity', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
+        </div> <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    {{ Form::label('Precio Noche') }}
+                    {{ Form::text('night_price', $product->night_price, ['class' => 'form-control' . ($errors->has('night_price') ? ' is-invalid' : ''), 'placeholder' => 'Precio Noche']) }}
+                    {!! $errors->first('night_price', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+
         </div>
     </div><br>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary" onClick = "javascript: p=true;">Submit</button>
+        <button type="submit" class="btn btn-primary" onClick="javascript: p=true;">Submit</button>
     </div>
 </div>

@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         $catProducts = DB::table('products')
         ->join('categories', 'products.category_id', 'categories.id')
-        ->select('products.id','products.product_name', 'products.selling_price', 'products.product_quantity')
+        ->select('products.id','products.product_name', 'products.selling_price','products.night_price', 'products.product_quantity')
         ->get();
         $stockOutProducts= DB::table('products')->where('product_quantity', '=', 0)->get();
         return view('home')->with(compact('products', 'customers', 'categories', 'catProducts', 'filtersearch', 'filter', 'stockOutProducts', 'filtersearch'));

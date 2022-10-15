@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    
+
     static $rules = [
 		'product_name' => 'required',
 		'selling_price' => 'required',
@@ -41,7 +41,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_name','selling_price','buying_price','category_id','supplier_id','product_code','root','buying_date','image','product_quantity'];
+    protected $fillable = ['product_name','selling_price','buying_price','category_id','supplier_id','product_code','root','buying_date','image','product_quantity','night_price'];
 
 
 

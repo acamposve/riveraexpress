@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::select('products.product_name', 'products.selling_price', 'products.buying_price', 'categories.category_name', 'suppliers.name', 'products.product_quantity', 'products.id')
+        $products = Product::select('products.product_name', 'products.selling_price','products.night_price', 'products.buying_price', 'categories.category_name', 'suppliers.name', 'products.product_quantity', 'products.id')
         ->join('categories', 'categories.id', '=', 'products.category_id')
         ->join('suppliers', 'suppliers.id', '=', 'products.supplier_id')
         ->paginate();
