@@ -60,7 +60,7 @@
                                         <td>{{ $order->due }}</td>
                                         <td>{{ $order->payBy }}</td>
                                         <td>{{ $order->order_date }}</td>
-                                        <td>{{ $order->created_at->format('H:i:s') }}</td>
+                                        <td>{{ $order->order_time }}</td>
 
                                         <td>
                                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
