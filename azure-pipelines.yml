@@ -27,9 +27,9 @@ steps:
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
-    serverUrl: 'ftp://$(URL)'
-    username: $(Login)
-    password: $(Password)
+    serverUrl: 'ftp://riveraexpress.com.uy'
+    username: 'rivera'
+    password: '2MP42qi!a'
     rootDirectory: ''
     filePatterns: '**'
     remoteDirectory: '/public_html/sistema'
