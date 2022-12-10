@@ -32,3 +32,19 @@ steps:
   name: envFile
   inputs:
     secureFile: '.env'
+
+- script: cp -f $(envFile.secureFilePath) .env
+  displayName: 'Copy Env File'
+- script: npm install
+ displayName: 'npm install'
+- script: npm run prod
+  displayName: 'npm run production'
+
+- task: ArchiveFiles@1
+    displayName: 'Archive files'
+    inputs:
+      rootFolder: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+      archiveType: zip
+- task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
