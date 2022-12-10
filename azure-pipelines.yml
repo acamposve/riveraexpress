@@ -47,4 +47,4 @@ steps:
     includeRootFolder: false
     archiveType: zip
 - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: drop'
+  displayName: 'Publish Artifact: drop'
