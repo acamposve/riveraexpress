@@ -25,9 +25,6 @@ steps:
 - script: composer install --no-interaction --prefer-dist
   displayName: 'composer install'
 
-- script: php artisan test
-  displayName: 'php artisan test'
-
 - task: DownloadSecureFile@1
   name: envFile
   inputs:
