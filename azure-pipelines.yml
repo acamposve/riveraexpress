@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  phpVersion: 7.2
+  phpVersion: 8.1
 
 steps:
 - script: |
@@ -24,3 +24,11 @@ steps:
 
 - script: composer install --no-interaction --prefer-dist
   displayName: 'composer install'
+
+- script: php artisan test
+  displayName: 'php artisan test'
+
+- task: DownloadSecureFile@1
+  name: envFile
+  inputs:
+    secureFile: '.env'
