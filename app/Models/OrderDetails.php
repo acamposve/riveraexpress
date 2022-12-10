@@ -23,20 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Order extends Model
+class OrderDetails extends Model
 {
 
-    static $rules = [
-    ];
 
-    protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['id','customer_id','qty','sub_total','vat','total','pay','due','payBy','order_date','order_month','order_year','order_time'];
+
+
 
 
 

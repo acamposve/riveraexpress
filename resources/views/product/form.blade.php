@@ -74,18 +74,8 @@
                     {!! $errors->first('product_quantity', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
-        </div> <div class="row">
-
-            <div class="col-md-6">
-                <div class="form-group">
-
-                    {{ Form::label('Precio Noche') }}
-                    {{ Form::text('night_price', $product->night_price, ['class' => 'form-control' . ($errors->has('night_price') ? ' is-invalid' : ''), 'placeholder' => 'Precio Noche']) }}
-                    {!! $errors->first('night_price', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
-
         </div>
+
     </div><br>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary" onClick="javascript: p=true;">Submit</button>

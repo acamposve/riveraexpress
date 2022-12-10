@@ -20,14 +20,39 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::select('products.product_name', 'products.selling_price','products.night_price', 'products.buying_price', 'categories.category_name', 'suppliers.name', 'products.product_quantity', 'products.id')
-        ->join('categories', 'categories.id', '=', 'products.category_id')
-        ->join('suppliers', 'suppliers.id', '=', 'products.supplier_id')
-        ->paginate();
+        if (request('search')) {
+            $products = Product::select('products.product_name', 'products.selling_price', 'products.buying_price', 'categories.category_name', 'suppliers.name', 'products.product_quantity', 'products.id')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('suppliers', 'suppliers.id', '=', 'products.supplier_id')
+            ->where('products.product_name', 'like', '%' . request('search') . '%')
+            ->paginate();
+        } else {
+            $products = Product::select('products.product_name', 'products.selling_price', 'products.buying_price', 'categories.category_name', 'suppliers.name', 'products.product_quantity', 'products.id')
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->join('suppliers', 'suppliers.id', '=', 'products.supplier_id')
+            ->paginate();
+        }
+
 
 
         return view('product.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
+    }
+
+    public function search(Request $request)
+    {
+
+        dd($request);
+        $input = $request->all();
+
+        if ($request->get('busqueda')) {
+            $noticias = Noticia::where("noticiero_turno", "LIKE", "%{$request->get('busqueda')}%")
+                ->paginate(5);
+        } else {
+            $noticias = Noticia::paginate(5);
+        }
+
+        return response($noticias);
     }
 
     /**

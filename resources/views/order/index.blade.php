@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    {{ $orders }}
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -33,18 +34,18 @@
                                         <th>No</th>
 
                                         <th>Cliente</th>
-                                        <th>Cantidad</th>
                                         <th>Total</th>
                                         <th>Pagado</th>
                                         <th>Deuda</th>
                                         <th>Metodo de Pago</th>
-                                        <th>Fecha de la venta</th>
-                                        <th>Hora de la venta</th>
+                                        <th>Numero de Ticket</th>
+                                        <th>Fecha</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach ($orders as $order)
                                         @if ($order->due > 1)
                                             <tr style="background-color: goldenrod">
@@ -54,14 +55,25 @@
                                         <td>{{ ++$i }}</td>
 
                                         <td>{{ $order->name }} ({{ $order->nickname }})</td>
-                                        <td>{{ $order->qty }}</td>
-                                       <td>{{ $order->total }}</td>
+                                        <td>{{ $order->total }}</td>
                                         <td>{{ $order->pay }}</td>
                                         <td>{{ $order->due }}</td>
                                         <td>{{ $order->payBy }}</td>
-                                        <td>{{ $order->order_date }}</td>
-                                        <td>{{ $order->order_time }}</td>
+                                        <td>{{ $order->order_ticket }}</td>
+                                        <td>{{ $order->order_date }} {{ $order->order_time }}</td>
+                                        <td>
+                                            @foreach ($orderdetails as $details)
+                                                @if ($order->id == $details->order_id)
+                                                <table>
+                                                    <tr>
+                                                        <td>{{ $details->product_quantity }}</td><td>{{ $details->product_name }}</td>
+                                                    </tr>
+                                                </table>
 
+
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary "
@@ -72,8 +84,8 @@
                                                         class="fa fa-fw fa-edit"></i> Editar</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                {{-- <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="fa fa-fw fa-trash"></i> Eliminar</button> --}}
                                             </form>
                                         </td>
                                         </tr>

@@ -31,6 +31,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('products', ProductController::class);
+
+Route::post('products/search', 'ProductController@search');
+
+
 Route::resource('categories', CategoryController::class);
 Route::resource('customers', CustomerController::class);
 Route::resource('orders', OrderController::class);

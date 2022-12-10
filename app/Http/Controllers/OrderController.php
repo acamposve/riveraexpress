@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class OrderController
@@ -18,9 +20,21 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')->paginate();
 
-        return view('order.index', compact('orders'))
+        $orders = DB::table('orders')
+            ->join('customers', 'orders.customer_id', '=', 'customers.id')
+            ->orderBy('orders.id', 'desc')
+            ->select('orders.id', 'customers.name', 'customers.nickname', 'orders.qty', 'orders.total', 'orders.pay', 'orders.due', 'orders.payBy', 'orders.order_date', 'orders.order_ticket', 'orders.order_time')
+            ->paginate(15);
+
+
+            $orderdetails =  DB::table('order_details')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+
+            ->select('products.product_name', 'order_details.product_quantity', 'order_details.order_id')
+            ->get();
+
+        return view('order.index', compact('orders', 'orderdetails'))
             ->with('i', (request()->input('page', 1) - 1) * $orders->perPage());
     }
 
@@ -61,7 +75,14 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
 
-        return view('order.show', compact('order'));
+        $details = DB::table('order_details')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+
+            ->select('products.product_name', 'order_details.product_quantity', 'order_details.product_price', 'order_details.sub_total')
+            ->where('order_details.order_id', '=', $id)
+            ->get();
+
+        return view('order.show', compact('order', 'details'));
     }
 
     /**
