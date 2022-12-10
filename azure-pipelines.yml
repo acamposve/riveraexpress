@@ -41,10 +41,10 @@ steps:
   displayName: 'npm run production'
 
 - task: ArchiveFiles@1
-    displayName: 'Archive files'
-    inputs:
-      rootFolder: '$(System.DefaultWorkingDirectory)'
-      includeRootFolder: false
-      archiveType: zip
+  displayName: 'Archive files'
+  inputs:
+    rootFolder: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: zip
 - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
