@@ -24,16 +24,3 @@ steps:
 
 - script: composer install --no-interaction --prefer-dist
   displayName: 'composer install'
-- task: FtpUpload@2
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftp://$(URL)'
-    username: $(Login)
-    password: $(Password)
-    rootDirectory: ''
-    filePatterns: '**'
-    remoteDirectory: '/public_html/sistema'
-    clean: false
-    cleanContents: false
-    preservePaths: false
-    trustSSL: false
